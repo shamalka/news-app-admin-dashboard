@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBarItem from "./components/SideBarItem";
 import { AppstoreAddOutlined, ProfileOutlined, TeamOutlined, DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import logo from '../../img/newspaper.png'
 
-const SideBar = () => {
+const SideBar = ({onCollapse}) => {
 
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const onSideMenuCollapse = () => {
-        console.log("Close")
         setIsCollapsed(!isCollapsed)
+        onCollapse(isCollapsed)
     }
+
+    const [width, setWidth]   = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+    const updateDimensions = () => {
+        if(window.innerWidth < 850) {
+            setIsCollapsed(true)
+        } else {
+            setIsCollapsed(false)
+        }
+    }
+    useEffect(() => {
+        window.addEventListener("resize", updateDimensions);
+        return () => window.removeEventListener("resize", updateDimensions);
+    }, []);
     
     return (
-        <div className={`fixed top-2 left-2 bottom-2 rounded-lg bg-sky-100 m-0 flex flex-col text-white shadow-2xl ${!isCollapsed ? "w-72 " : "w-20"} transition-all duration-200 ease-linear`}>
+        <div className={`fixed top-2 left-2 bottom-2 rounded-lg bg-sky-100 m-0 flex flex-col text-white shadow-2xl ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear`}>
             <div className="h-14 mt-2 flex items-center justify-center">
                 <img src={logo} className="w-12 h-12"/>
             </div>
