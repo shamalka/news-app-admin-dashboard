@@ -1,12 +1,11 @@
 import React from "react";
 import App from "./App";
-import {render, screen} from "@testing-library/react";
+import { render, fireEvent, screen } from "./utils/test-utils";
+
 
 describe("App Component", function () {
-    it("should have hello world message", function () {
-        render(<App />);
-        const heading = screen.getByText(/Hello world! I am using React/i);
-        expect(heading).toBeInTheDocument()
-        // expect(screen).toMatchSnapshot();
-    });
+    it("Test App component snapshot", async () => {
+        render(<App />)
+        expect(screen).toMatchSnapshot();
+      })
 });

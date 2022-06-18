@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { AppstoreAddOutlined, ProfileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import SideBar from "../../components/SideBar";
 import { Outlet } from "react-router";
 import { useSelector } from "react-redux";
+
+const sideMenuConfig = [
+    {
+        title: "Overview",
+        route: "/",
+        icon: <AppstoreAddOutlined className="sidebar-icon" />
+    },
+    {
+        title: "News",
+        route: "/news",
+        icon: <ProfileOutlined className="sidebar-icon" />
+    },
+    {
+        title: "Users",
+        route: "/users",
+        icon: <TeamOutlined className="sidebar-icon" />
+    }
+]
 
 const Home = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -27,9 +45,9 @@ const Home = () => {
     return (
         <div className="flex h-screen">
             <div className={`flex-none ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear"`}>
-                <SideBar onCollapse={onCollapse} />
+                <SideBar sideMenuConfig={sideMenuConfig} onCollapse={onCollapse} />
             </div>
-            <div className={`flex-1 bg-red-50 `}>
+            <div className={`flex-1 bg-gray-50 `}>
                 <Outlet />
             </div>
         </div>

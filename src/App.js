@@ -34,9 +34,7 @@ const App = () => {
         } else {
             dispatch(changeAppWindowSize("small"))
         }
-        // console.log(appWindowSize)
     }
-
 
     return (
         <BrowserRouter>
