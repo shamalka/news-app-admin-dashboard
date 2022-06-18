@@ -6,4 +6,7 @@
     .sidebar-icon {
         @apply text-lg font-bold
     }
+    .overview-tile {
+        @apply bg-white rounded-lg shadow-md h-28 flex items-center justify-center hover:shadow-lg
+    }
 }

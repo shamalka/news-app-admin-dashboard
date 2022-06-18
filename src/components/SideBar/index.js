@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 import SideBarItem from "./components/SideBarItem";
 import { AppstoreAddOutlined, ProfileOutlined, TeamOutlined, DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import logo from '../../img/newspaper.png'
+import { Link , useNavigate} from "react-router-dom";
+
+const sideMenuConfig = [
+    {
+        title: "Overview",
+        route: "/",
+        icon: <AppstoreAddOutlined className="sidebar-icon"/>
+    },
+    {
+        title: "News",
+        route: "/news",
+        icon: <ProfileOutlined className="sidebar-icon"/>
+    },
+    {
+        title: "Users",
+        route: "/users",
+        icon: <TeamOutlined className="sidebar-icon"/>
+    }
+]
 
 const SideBar = ({onCollapse}) => {
 
     const [isCollapsed, setIsCollapsed] = useState(false);
+    let navigate = useNavigate();
 
     const onSideMenuCollapse = () => {
         setIsCollapsed(!isCollapsed)
@@ -27,7 +47,7 @@ const SideBar = ({onCollapse}) => {
     }, []);
     
     return (
-        <div className={`fixed top-2 left-2 bottom-2 rounded-lg bg-sky-100 m-0 flex flex-col text-white shadow-2xl ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear`}>
+        <div className={`fixed top-0 bottom-0 bg-sky-100 flex flex-col text-white shadow-2xl ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear`}>
             <div className="h-14 mt-2 flex items-center justify-center">
                 <img src={logo} className="w-12 h-12"/>
             </div>
@@ -36,9 +56,15 @@ const SideBar = ({onCollapse}) => {
                     {!isCollapsed ? <DoubleLeftOutlined className="text-lg text-gray-900"/> : <DoubleRightOutlined className="text-lg text-gray-900"/>}
                 </div>
             </div>
-            <SideBarItem title="Overview" icon={<AppstoreAddOutlined className="sidebar-icon"/>} isCollapsed={isCollapsed}/>
-            <SideBarItem title="News" icon={<ProfileOutlined className="sidebar-icon"/>} isCollapsed={isCollapsed}/>
-            <SideBarItem title="Users" icon={<TeamOutlined className="sidebar-icon"/>} isCollapsed={isCollapsed}/>
+            <div className="mt-2">
+                {
+                    sideMenuConfig.map((sideMenuItem, index) => (
+                        <Link to={sideMenuItem.route} key={index}>
+                            <SideBarItem title={sideMenuItem.title} icon={sideMenuItem.icon} isCollapsed={isCollapsed}/>
+                        </Link>
+                    ))
+                }
+            </div>
         </div>
     );
 };

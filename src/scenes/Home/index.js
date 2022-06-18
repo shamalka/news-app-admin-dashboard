@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Breadcrumb, Layout, Menu } from 'antd';
 import {DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined} from '@ant-design/icons';
 import SideBar from "../../components/SideBar";
+import { Outlet } from "react-router";
 
 const Home = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -26,11 +27,11 @@ const Home = () => {
 
     return (
         <div className="flex h-screen">
-            <div className={`flex-none mt-2 ml-2 mb-2 ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear"`}>
+            <div className={`flex-none ${!isCollapsed ? "w-80" : "w-20"} transition-all duration-200 ease-linear"`}>
                 <SideBar onCollapse={onCollapse}/>
             </div>
-            <div className={`flex-1 bg-slate-500 mb-2 mt-2 mr-2 ml-5 rounded-lg shadow-xl`}>
-                Content
+            <div className={`flex-1 bg-red-50 `}>
+                <Outlet/>
             </div>
         </div>
     );

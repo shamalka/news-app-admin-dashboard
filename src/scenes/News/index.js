@@ -1,8 +1,11 @@
 import React from "react";
+import ContentHeader from "../../components/ContentHeader";
 
 const News = () => {
     return (
-        <h1>News</h1>
+        <div>
+            <ContentHeader title="News" breadcrumbArray={["News"]}/>
+        </div>
     );
 };
 
