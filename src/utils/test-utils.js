@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import appWindowSizeReducer from '../features/appWindowSize'
 // Import your own reducer
 
-
 function render(
   ui,
   {

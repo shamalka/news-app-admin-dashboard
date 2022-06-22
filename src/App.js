@@ -12,6 +12,7 @@ import Users from "./scenes/Users";
 import Overview from "./scenes/Overview";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { changeAppWindowSize } from "./features/appWindowSize";
+import Login from "./scenes/Login";
 
 const App = () => {
     const appWindowSize = useSelector(
@@ -44,6 +45,7 @@ const App = () => {
                     <Route path="news" element={<News />} />
                     <Route path="users" element={<Users />} />
                 </Route>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/my-account" element={<ProtectedRoute component={<MyAccount />} />} />
             </Routes>
         </BrowserRouter>
