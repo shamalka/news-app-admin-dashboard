@@ -2,12 +2,27 @@ import { FacebookOutlined, GithubOutlined, GoogleOutlined } from "@ant-design/ic
 import { Divider } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import Button from "../../components/Button";
+import { login } from "../../utils/apis";
 
 const Login = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    let username = null;
+    let password = null;
+
+    const {isLoading, error, data, refetch } = useQuery('login', () => login(username, password), {
+        enabled : false,
+        refetchOnmount: false,
+        refetchOnReconnect: false,
+        retry: false,
+    })
+    const onSubmit = userdata => {
+        username = userdata.username;
+        password = userdata.password
+        refetch()
+    }
 
     return (
         <div className="flex h-screen items-center justify-center">
@@ -27,7 +42,7 @@ const Login = () => {
                     />
                     {errors.exampleRequired && <span>This field is required</span>}
                     
-                    <Button type="submit" className="bg-slate-700 text-white mt-4 w-full hover:bg-slate-500 shadow-lg">
+                    <Button loading={isLoading} type="submit" className="bg-slate-700 text-white mt-4 w-full hover:bg-slate-500 shadow-lg">
                         Submit
                     </Button>
 
